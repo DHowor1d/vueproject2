@@ -2,7 +2,7 @@
   <div
     v-for="(item, i) in $store.state.userData"
     :key="i"
-    class="d-flex gap-2 border rounded p-3 mb-3"
+    class="user_list d-flex gap-2 border rounded p-3 mb-3"
   >
     <div class="avata">
       <img :src="item.image" alt="" />
@@ -12,8 +12,10 @@
         <h5 class="mb-0">{{ item.userid }}</h5>
         <p class="mb-0">{{ item.username }}</p>
       </div>
-      <button class = "detail" @click="openModal(item)">상세보기</button>
-      <button class = "delete" @click="openModal(item)">삭제</button>
+      <div> 
+      <button class = "detail  me-2" @click="openModal(item)">상세보기</button>
+      <button class = "delete" @click="deleteUser(item)">삭제</button>
+    </div>
     </div>
   </div>
   <UserDetailModal 
@@ -43,14 +45,20 @@ const closeModal = () => {
 };
 
 const updateUser = (updatedUser) => {
-  console.log('updateUser 호출됨', updatedUser); // 콘솔 로그 추가
-  // 사용자 데이터를 업데이트하는 로직을 추가합니다.
   const index = store.state.userData.findIndex(user => user.userid === updatedUser.userid);
   if (index !== -1) {
     store.commit('updateUser', { index, updatedUser });
   }
   closeModal();
 };
+
+const deleteUser = (user) => {
+  const index = store.state.userData.findIndex(u => u.userid === user.userid);
+  if (index !== -1) {
+    store.commit('deleteUser', index);
+  }
+};
+
 </script>
 
 <style scoped>
@@ -76,7 +84,7 @@ const updateUser = (updatedUser) => {
 }
 
 .delete {
-  background-color: #f94c4c;
+  background-color: hsl(0, 78%, 65%);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -87,6 +95,10 @@ const updateUser = (updatedUser) => {
 
 .delete:hover {
   background-color: hsl(0, 100%, 51%);
+}
+
+.user_list:hover {
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2); 
 }
 
 </style>

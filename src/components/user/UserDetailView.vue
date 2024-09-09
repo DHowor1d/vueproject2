@@ -1,9 +1,8 @@
 <template>
   <div v-if="show" class="modal-overlay">
     <div class="modal-content">
-      <button @click="close">Close</button>
+      <button class="close" @click="close">Close</button>
       <div v-if="editMode">
-        <!-- 수정 모드일 때 입력 필드로 전환 -->
         <input type="text" v-model="editableUser.userid" />
         <input type="file" @change="handleImage" accept="image/*" />
         <img class="profile_img" :src="editableUser.image" alt="User Image" />
@@ -19,8 +18,7 @@
         <p>{{ user.password }}</p>
         <p>{{ user.username }}</p>
         <p>{{ user.addr }}</p>
-        <!-- 수정 버튼 추가 -->
-        <button @click="editMode = true">수정</button>
+        <button class="modif" @click="editMode = true">수정</button>
       </div>
     </div>
   </div>
@@ -94,4 +92,33 @@ const cancelEdit = () => {
   border-radius: 50%;
   overflow: hidden;
 }
+
+.modif {
+  background-color: hsl(0, 78%, 65%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modif:hover {
+  background-color: hsl(0, 96%, 45%);
+}
+
+.close {
+  background-color: hsl(115, 96%, 68%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.close:hover {
+  background-color: hsl(138, 100%, 50%);
+}
 </style>
+
