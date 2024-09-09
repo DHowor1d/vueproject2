@@ -1,6 +1,8 @@
 <template>
   <div>지도 {{ moveLat }} / {{ moveLng }}</div>
-  <div id="map" style="width: 500px; height: 400px"></div>
+
+  <!-- 높이 너비 500px로 설정 후, border-radius: 50%로 원형으로 만들어줍니다. 오버플로우 x-->
+  <div id="map" style="width: 500px; height: 500px; border-radius: 50%; overflow: hidden; "></div>
 
   {{ latitude }}{{ longitude }}
 </template>
